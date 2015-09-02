@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebAPI", "SimpleWebAPI\SimpleWebAPI.csproj", "{6D64E0AE-65CF-4CEF-8602-1AAC35FC4114}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebAPI.Services", "SimpleWebAPI.Services\SimpleWebAPI.Services.csproj", "{B5298097-EDFD-4A6D-AC17-647B215A40B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebAPI.Models", "SimpleWebAPI.Models\SimpleWebAPI.Models.csproj", "{E6A11001-6BD9-4D15-B185-62A1B94C2AF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6D64E0AE-65CF-4CEF-8602-1AAC35FC4114}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D64E0AE-65CF-4CEF-8602-1AAC35FC4114}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D64E0AE-65CF-4CEF-8602-1AAC35FC4114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5298097-EDFD-4A6D-AC17-647B215A40B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5298097-EDFD-4A6D-AC17-647B215A40B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5298097-EDFD-4A6D-AC17-647B215A40B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5298097-EDFD-4A6D-AC17-647B215A40B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6A11001-6BD9-4D15-B185-62A1B94C2AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6A11001-6BD9-4D15-B185-62A1B94C2AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6A11001-6BD9-4D15-B185-62A1B94C2AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6A11001-6BD9-4D15-B185-62A1B94C2AF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

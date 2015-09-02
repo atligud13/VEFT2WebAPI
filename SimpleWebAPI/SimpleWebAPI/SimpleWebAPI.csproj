@@ -215,9 +215,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Courses.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Students.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -288,6 +286,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleWebAPI.Models\SimpleWebAPI.Models.csproj">
+      <Project>{e6a11001-6bd9-4d15-b185-62a1b94c2af7}</Project>
+      <Name>SimpleWebAPI.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleWebAPI.Services\SimpleWebAPI.Services.csproj">
+      <Project>{b5298097-edfd-4a6d-ac17-647b215a40b5}</Project>
+      <Name>SimpleWebAPI.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
