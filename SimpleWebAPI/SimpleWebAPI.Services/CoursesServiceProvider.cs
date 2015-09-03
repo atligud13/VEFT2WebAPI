@@ -5,11 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleWebAPI.Models;
+using SimpleWebAPI.Services.Repositories;
 
 namespace SimpleWebAPI.Services
 {
     public class CoursesServiceProvider
     {
+        private readonly AppDataContext _db;
+
+        public CoursesServiceProvider()
+        {
+            _db = new AppDataContext();
+        }
+
         /// <summary>
         /// Returns a list of courses for a given semester.
         /// If no semester is provided, the current semester
@@ -19,12 +27,31 @@ namespace SimpleWebAPI.Services
         /// <returns></returns>
         public List<CourseDTO> GetCoursesBySemester(string semester = null)
         {
-            if(string.IsNullOrEmpty(semester))
+            if (string.IsNullOrEmpty(semester))
             {
                 semester = "20153";
             }
 
-            return null;
+            StudentDTO student = new StudentDTO
+            {
+                ID = 1,
+                Name = "Atli",
+                SSN = "124"
+            };
+            List<StudentDTO> students = new List<StudentDTO>();
+            students.Add(student);
+
+            var result = (from c in _db.Courses
+                          select new CourseDTO
+                          {
+                              ID = c.ID,
+                              Name = "",
+                              StartDate = c.StartDate,
+                              TemplateID = c.TemplateID,
+                              EndDate = c.EndDate
+                          }).ToList();
+
+            return result;
         }
 
         /// <summary>

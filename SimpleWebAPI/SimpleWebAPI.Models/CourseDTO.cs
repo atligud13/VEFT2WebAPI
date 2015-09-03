@@ -33,9 +33,10 @@ namespace SimpleWebAPI.Models
         /// </summary>
         public DateTime EndDate { get; set; }
 
+        /*
         /// <summary>
         /// A list of students enrolled in the course
         /// </summary>
-        public List<StudentDTO> Students { get; set; }
+        public List<StudentDTO> Students { get; set; } */
     }
 }

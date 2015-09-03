@@ -489,7 +489,12 @@
             documentation.
             </summary>
         </member>
-        <member name="M:SimpleWebAPI.Controllers.CoursesController.GetCourses">
+        <member name="M:SimpleWebAPI.Controllers.CoursesController.#ctor">
+            <summary>
+            Constructor, initializes all services.
+            </summary>
+        </member>
+        <member name="M:SimpleWebAPI.Controllers.CoursesController.GetCourses(System.String)">
             <summary>
             Returns a list of all courses
             </summary>
@@ -502,13 +507,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleWebAPI.Controllers.CoursesController.AddCourse(SimpleWebAPI.Models.Course)">
+        <member name="M:SimpleWebAPI.Controllers.CoursesController.AddCourse(SimpleWebAPI.Models.CourseViewModel)">
             <summary>
             Adds a new course to the list
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleWebAPI.Controllers.CoursesController.UpdateCourse(System.Int32,SimpleWebAPI.Models.Course)">
+        <member name="M:SimpleWebAPI.Controllers.CoursesController.UpdateCourse(System.Int32,SimpleWebAPI.Models.CourseViewModel)">
             <summary>
             Updates the course with the given id
             </summary>
@@ -528,52 +533,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleWebAPI.Controllers.CoursesController.AddStudent(System.Int32,SimpleWebAPI.Models.Student)">
+        <member name="M:SimpleWebAPI.Controllers.CoursesController.AddStudent(System.Int32,SimpleWebAPI.Models.StudentViewModel)">
             <summary>
             Adds the student to the course with the given id
             </summary>
-            <param name="id"></param>
+            <param name="courseID"></param>
+            <param name="newStudent"></param>
             <returns></returns>
-        </member>
-        <member name="P:SimpleWebAPI.Models.Course.Name">
-            <summary>
-            Name of the course
-            </summary>
-        </member>
-        <member name="P:SimpleWebAPI.Models.Course.TemplateID">
-            <summary>
-            Template ID of the course
-            </summary>
-        </member>
-        <member name="P:SimpleWebAPI.Models.Course.ID">
-            <summary>
-            Database ID for this course
-            </summary>
-        </member>
-        <member name="P:SimpleWebAPI.Models.Course.StartDate">
-            <summary>
-            Start date of this course
-            </summary>
-        </member>
-        <member name="P:SimpleWebAPI.Models.Course.EndDate">
-            <summary>
-            End date of this course
-            </summary>
-        </member>
-        <member name="P:SimpleWebAPI.Models.Course.Students">
-            <summary>
-            A list of students enrolled in the course
-            </summary>
-        </member>
-        <member name="F:SimpleWebAPI.Models.Student.SSN">
-            <summary>
-            Social security number of this student
-            </summary>
-        </member>
-        <member name="F:SimpleWebAPI.Models.Student.Name">
-            <summary>
-            The name of this student
-            </summary>
         </member>
     </members>
 </doc>

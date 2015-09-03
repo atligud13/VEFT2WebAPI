@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SimpleWebAPI.Services.Entities
 {
+    [Table("Courses")]
     class Course
     {
         /// <summary>
