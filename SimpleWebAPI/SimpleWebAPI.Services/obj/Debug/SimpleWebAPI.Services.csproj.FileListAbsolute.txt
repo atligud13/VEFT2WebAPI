@@ -10,3 +10,4 @@ C:\Users\Atli\Documents\HR\Haust2015\Vefþjónustur\Verkefni\VEFT2WebAPI\SimpleW
 C:\Users\Atli\Documents\HR\Haust2015\Vefþjónustur\Verkefni\VEFT2WebAPI\SimpleWebAPI\SimpleWebAPI.Services\obj\Debug\SimpleWebAPI.Services.csprojResolveAssemblyReference.cache
 C:\Users\Atli\Documents\HR\Haust2015\Vefþjónustur\Verkefni\VEFT2WebAPI\SimpleWebAPI\SimpleWebAPI.Services\obj\Debug\SimpleWebAPI.Services.dll
 C:\Users\Atli\Documents\HR\Haust2015\Vefþjónustur\Verkefni\VEFT2WebAPI\SimpleWebAPI\SimpleWebAPI.Services\obj\Debug\SimpleWebAPI.Services.pdb
+C:\Users\Atli\Documents\HR\Haust2015\Vefþjónustur\Verkefni\VEFT2WebAPI\SimpleWebAPI\SimpleWebAPI.Services\bin\Debug\XMLDocument.xml

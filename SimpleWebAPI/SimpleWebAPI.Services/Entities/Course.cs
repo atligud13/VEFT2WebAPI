@@ -15,7 +15,7 @@ namespace SimpleWebAPI.Services.Entities
         /// Template ID of this course
         /// For example: T-514-VEFT
         /// </summary>
-        public string TemplateID { get; set; }
+        public string CourseID { get; set; }
 
         /// <summary>
         /// Start date of this course

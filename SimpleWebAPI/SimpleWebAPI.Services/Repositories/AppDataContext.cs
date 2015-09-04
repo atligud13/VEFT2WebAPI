@@ -11,5 +11,8 @@ namespace SimpleWebAPI.Services.Repositories
     class AppDataContext : DbContext
     {
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseTemplate> CourseTemplates { get; set; }
+        public DbSet<CourseRegistration> CourseRegistrations { get; set; }
+        public DbSet<Person> Persons { get; set; }
     }
 }

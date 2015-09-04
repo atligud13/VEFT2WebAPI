@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SimpleWebAPI.Services.Entities
 {
-    /// <summary>
-    /// A mapping class used to find the name of 
-    /// a course from it's course ID.
-    /// </summary>
+    [Table("CourseTemplates")]
     class CourseTemplate
     {
+        /// <summary>
+        /// The database generated ID of the template
+        /// </summary>
+        public int ID { get; set; }
+
         /// <summary>
         /// Specifies the name of this course
         /// For example: Web Services

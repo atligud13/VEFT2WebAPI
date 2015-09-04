@@ -7,6 +7,7 @@ using System.Web.Http;
 using SimpleWebAPI.Models;
 using System.Web.Http.Description;
 using SimpleWebAPI.Services;
+using SimpleWebAPI.Services.Exceptions;
 using System.Data.Entity.Core;
 
 namespace SimpleWebAPI.Controllers
@@ -51,13 +52,13 @@ namespace SimpleWebAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id:int}", Name = "GetCourse")]
-        public CourseDTO GetCourseById(int id)
+        public CourseDetailsDTO GetCourseById(int id)
         {
             try
             {
                 return _service.GetCourseByID(id);
             }
-            catch(ObjectNotFoundException)
+            catch(CourseNotFoundException)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
@@ -70,21 +71,26 @@ namespace SimpleWebAPI.Controllers
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(CourseDTO))]
-        public IHttpActionResult AddCourse(CourseViewModel newCourse)
+        public IHttpActionResult AddCourse(AddCourseViewModel newCourse)
         {
-            CourseDTO course;
-            try
+            if (ModelState.IsValid)
             {
-                course = _service.AddCourse(newCourse);
+                try
+                {
+                    CourseDetailsDTO course = _service.AddCourse(newCourse);
+                    var location = Url.Link("GetCourse", new { id = course.ID });
+
+                    return Created(location, course);
+                }
+                catch(CourseNotFoundException)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
+                }
             }
-            catch(ObjectNotFoundException)
+            else
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return StatusCode(HttpStatusCode.PreconditionFailed);
             }
-
-            var location = Url.Link("GetCourse", new { id = course.ID });
-
-            return Created(location, course);
         }
 
         /// <summary>
@@ -96,17 +102,24 @@ namespace SimpleWebAPI.Controllers
         [HttpPut]
         [ResponseType(typeof(CourseDTO))]
         [Route("{id:int}")]
-        public IHttpActionResult UpdateCourse(int id, CourseViewModel newCourse)
+        public IHttpActionResult UpdateCourse(int id, UpdateCourseViewModel newCourse)
         {
-            try
+            if (ModelState.IsValid)
             {
-                _service.UpdateCourse(id, newCourse);
+                try
+                {
+                    _service.UpdateCourse(id, newCourse);
+                    return Ok();
+                }
+                catch (CourseNotFoundException)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
+                }
             }
-            catch(ObjectNotFoundException)
+            else
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return StatusCode(HttpStatusCode.PreconditionFailed);
             }
-            return Ok();
         }
 
         /// <summary>
@@ -121,7 +134,7 @@ namespace SimpleWebAPI.Controllers
             {
                 _service.DeleteCourse(id);
             }
-            catch(ObjectNotFoundException)
+            catch(CourseNotFoundException)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
@@ -139,7 +152,7 @@ namespace SimpleWebAPI.Controllers
             {
                 return _service.GetStudentsByCourseID(id);
             }
-            catch(ObjectNotFoundException)
+            catch(CourseNotFoundException)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
@@ -148,26 +161,33 @@ namespace SimpleWebAPI.Controllers
         /// <summary>
         /// Adds the student to the course with the given id
         /// </summary>
-        /// <param name="courseID"></param>
+        /// <param name="id"></param>
         /// <param name="newStudent"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("{id:int}/students")]
-        public IHttpActionResult AddStudent(int courseID, StudentViewModel newStudent)
+        public IHttpActionResult AddStudent(int id, StudentViewModel newStudent)
         {
-            StudentDTO student;
-            try
+            if (ModelState.IsValid)
             {
-                student = _service.AddStudentToCourse(courseID, newStudent);
+                try
+                {
+                    StudentDTO student = _service.AddStudentToCourse(id, newStudent);
+                    return Content(HttpStatusCode.Created, student);
+                }
+                catch (CourseNotFoundException)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
+                }
+                catch (StudentNotFoundException)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
+                }
             }
-            catch(ObjectNotFoundException)
+            else
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return StatusCode(HttpStatusCode.PreconditionFailed);
             }
-
-            var location = Url.Link("GetStudent", new { courseID = courseID, studentID = student.ID });
-
-            return Created(location, student) ;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleWebAPI.Models
 {
-    public class CourseDTO
+    public class CourseDetailsDTO
     {
         /// <summary>
         /// Name of the course
@@ -34,8 +34,8 @@ namespace SimpleWebAPI.Models
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// The number students enrolled in the course
+        /// A list of students enrolled in the course
         /// </summary>
-        public int StudentCount { get; set; }
+        public List<StudentDTO> Students { get; set; }
     }
 }

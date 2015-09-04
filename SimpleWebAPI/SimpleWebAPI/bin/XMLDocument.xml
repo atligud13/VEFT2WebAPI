@@ -507,13 +507,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleWebAPI.Controllers.CoursesController.AddCourse(SimpleWebAPI.Models.CourseViewModel)">
+        <member name="M:SimpleWebAPI.Controllers.CoursesController.AddCourse(SimpleWebAPI.Models.AddCourseViewModel)">
             <summary>
             Adds a new course to the list
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleWebAPI.Controllers.CoursesController.UpdateCourse(System.Int32,SimpleWebAPI.Models.CourseViewModel)">
+        <member name="M:SimpleWebAPI.Controllers.CoursesController.UpdateCourse(System.Int32,SimpleWebAPI.Models.UpdateCourseViewModel)">
             <summary>
             Updates the course with the given id
             </summary>
@@ -537,7 +537,7 @@
             <summary>
             Adds the student to the course with the given id
             </summary>
-            <param name="courseID"></param>
+            <param name="id"></param>
             <param name="newStudent"></param>
             <returns></returns>
         </member>

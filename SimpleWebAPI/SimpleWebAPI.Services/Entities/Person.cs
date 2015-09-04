@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace SimpleWebAPI.Services.Entities
 {
-    [Table("CourseRegistrations")]
-    class CourseRegistration
+    [Table("Persons")]
+    class Person
     {
         /// <summary>
-        /// The ID of this registration
+        /// Database ID for this person
         /// </summary>
         public int ID { get; set; }
 
         /// <summary>
-        /// The ID of the student
+        /// Social security number of this person
         /// </summary>
-        public int StudentID { get; set; }
+        public string SSN { get; set; }
 
         /// <summary>
-        /// The ID of the course.
+        /// The name of this person
         /// </summary>
-        public int CourseID { get; set; }
+        public string Name { get; set; }
     }
 }
