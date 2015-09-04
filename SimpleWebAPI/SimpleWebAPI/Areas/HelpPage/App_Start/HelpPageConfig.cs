@@ -2,6 +2,8 @@
 // package to your project.
 ////#define Handle_PageResultOfT
 
+using API.Areas.HelpPage;
+using SimpleWebAPI.Areas.HelpPage;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,7 +36,7 @@ namespace SimpleWebAPI.Areas.HelpPage
         public static void Register(HttpConfiguration config)
         {
             //// Uncomment the following to use the documentation from XML documentation file.
-            config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/XmlDocument.xml")));
+            config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/XmlDocument.xml"), null));
 
             //// Uncomment the following to use "sample string" as the sample for all actions that have string as the body parameter or return type.
             //// Also, the string arrays will be used for IEnumerable<string>. The sample objects will be serialized into different media type 
@@ -76,9 +78,11 @@ namespace SimpleWebAPI.Areas.HelpPage
             //config.SetActualRequestType(typeof(string), "Values", "Get");
 
             //// Uncomment the following to correct the sample response when the action returns an HttpResponseMessage with ObjectContent<string>.
-            //// The sample will be generated as if the controller named "Values" and action named "Post" were returning a string.
+            //// The sample will be generated as if the controller named "Values" and action named "Post" were returning a string. HttpContext.Current.Server.MapPath("~/App_Data/APIModels.xml")
             //config.SetActualResponseType(typeof(string), "Values", "Post");
+            config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/XMLDocument.xml"), null));
         }
+
 
 #if Handle_PageResultOfT
         private static object GeneratePageResult(HelpPageSampleGenerator sampleGenerator, Type type)

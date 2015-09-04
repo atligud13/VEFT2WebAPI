@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -6,15 +7,16 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
 using SimpleWebAPI.Areas.HelpPage.ModelDescriptions;
-
-namespace SimpleWebAPI.Areas.HelpPage
+#pragma warning disable 1591
+namespace API.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
     /// </summary>
     public class XmlDocumentationProvider : IDocumentationProvider, IModelDocumentationProvider
     {
-        private XPathNavigator _documentNavigator;
+        private readonly XPathNavigator _documentNavigator;
+        private readonly XPathNavigator _altenativeDocument;
         private const string TypeExpression = "/doc/members/member[@name='T:{0}']";
         private const string MethodExpression = "/doc/members/member[@name='M:{0}']";
         private const string PropertyExpression = "/doc/members/member[@name='P:{0}']";
@@ -25,7 +27,8 @@ namespace SimpleWebAPI.Areas.HelpPage
         /// Initializes a new instance of the <see cref="XmlDocumentationProvider"/> class.
         /// </summary>
         /// <param name="documentPath">The physical path to XML document.</param>
-        public XmlDocumentationProvider(string documentPath)
+        /// <param name="alternativeDocPath">The physical path to XML document.</param>
+        public XmlDocumentationProvider(string documentPath, string alternativeDocPath)
         {
             if (documentPath == null)
             {
@@ -33,6 +36,12 @@ namespace SimpleWebAPI.Areas.HelpPage
             }
             XPathDocument xpath = new XPathDocument(documentPath);
             _documentNavigator = xpath.CreateNavigator();
+
+            if (!String.IsNullOrEmpty(alternativeDocPath))
+            {
+                XPathDocument xp = new XPathDocument(alternativeDocPath);
+                _altenativeDocument = xp.CreateNavigator();
+            }
         }
 
         public string GetDocumentation(HttpControllerDescriptor controllerDescriptor)
@@ -78,7 +87,7 @@ namespace SimpleWebAPI.Areas.HelpPage
             string memberName = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", GetTypeName(member.DeclaringType), member.Name);
             string expression = member.MemberType == MemberTypes.Field ? FieldExpression : PropertyExpression;
             string selectExpression = String.Format(CultureInfo.InvariantCulture, expression, memberName);
-            XPathNavigator propertyNode = _documentNavigator.SelectSingleNode(selectExpression);
+            XPathNavigator propertyNode = SelectSingleNode(selectExpression);
             return GetTagValue(propertyNode, "summary");
         }
 
@@ -94,7 +103,7 @@ namespace SimpleWebAPI.Areas.HelpPage
             if (reflectedActionDescriptor != null)
             {
                 string selectExpression = String.Format(CultureInfo.InvariantCulture, MethodExpression, GetMemberName(reflectedActionDescriptor.MethodInfo));
-                return _documentNavigator.SelectSingleNode(selectExpression);
+                return SelectSingleNode(selectExpression);
             }
 
             return null;
@@ -120,7 +129,8 @@ namespace SimpleWebAPI.Areas.HelpPage
                 XPathNavigator node = parentNode.SelectSingleNode(tagName);
                 if (node != null)
                 {
-                    return node.Value.Trim();
+                    string value = node.InnerXml.Trim();
+                    return value;
                 }
             }
 
@@ -131,7 +141,7 @@ namespace SimpleWebAPI.Areas.HelpPage
         {
             string controllerTypeName = GetTypeName(type);
             string selectExpression = String.Format(CultureInfo.InvariantCulture, TypeExpression, controllerTypeName);
-            return _documentNavigator.SelectSingleNode(selectExpression);
+            return SelectSingleNode(selectExpression);
         }
 
         private static string GetTypeName(Type type)
@@ -156,6 +166,17 @@ namespace SimpleWebAPI.Areas.HelpPage
             }
 
             return name;
+        }
+
+        private XPathNavigator SelectSingleNode(string selectExpression)
+        {
+            var result = _documentNavigator.SelectSingleNode(selectExpression);
+            if (result == null
+                && _altenativeDocument != null)
+            {
+                result = _altenativeDocument.SelectSingleNode(selectExpression);
+            }
+            return result;
         }
     }
 }
